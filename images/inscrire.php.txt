@@ -1,0 +1,73 @@
+
+         <?php
+            $bdd = new PDO('mysql:host=127.0.0.1;dbname=client','root','')
+             if(isset($_POST['forminscription']))
+             {
+                 echo"ok";
+             }
+          ?>
+
+<!DOCTYPE  html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Login / Sign Up Form</title>
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="inscrire.css">
+</head>
+<body>
+    <div class="container">
+        <form class="form" id="login">
+            <h1 class="form__title">Login</h1>
+            <div class="form__message form__message--error"></div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" autofocus placeholder="email ">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input" autofocus placeholder="Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button"  type="submit">Continue</button>
+            <p class="form__text">
+                <a href="#" class="form__link">Forgot your password?</a>
+            </p>
+            <p class="form__text">
+                <a class="form__link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
+            </p>
+           
+            
+        
+                    <form class="form form--hidden"  method="postid" Action="inscription.php">
+            <h1 class="form__title">Create Account</h1>
+            <div class="form__message form__message--error"></div>
+            <div class="form__input-group">
+                <input type="text" id="signupUsername" class="form__input" autofocus placeholder="Username">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="text" class="form__input" autofocus placeholder="Email Address">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input" autofocus placeholder="Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input type="password" class="form__input" autofocus placeholder="Confirm password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" name="forminscription" type="submit">Continue</button>
+           <?php
+            $insertmbr = $bdd->prepare("INSERT INTO client(pseudo ,mail , motdepasse) VALUES(?,?,?)");
+            $insertmbr->execute(array($pseudo,$mail,$motdepasse ));
+            $_SESSION['comptecree'] = "votre compte a bien ete cree !";
+            header('location: index.html');
+            ?>
+            <p class="form__text">
+                <a class="form__link" href="./" id="linkLogin">Already have an account? Sign in</a>
+            </p>
+        </form>
+    </div>
+    <script src="inscrire.js"></script>
+</body>
